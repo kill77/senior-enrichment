@@ -6,6 +6,8 @@ import SingleUser from './SingleUser';
 import { connect } from 'react-redux';
 import Campuses from './Campuses';
 import SingleCampus from './SingleCampus';
+import addNewCampus from './addNewCampus';
+import addNewStudent from './addNewStudents.js';
 
 class Main extends Component {
 
@@ -22,12 +24,16 @@ class Main extends Component {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/allStudents">See All Students</Link></li>
           <li><Link to="/allCampuses">See All Campuses</Link></li>
+          <li><Link to="/addNewCampus">Add New Campus</Link></li>
+          <li><Link to="/addStudent">Add New Student</Link></li>
         </ul>
         <Switch>
           <Route path="/allStudents" component={Users} />
           <Route path="/student/:id" component={SingleUser} />
           <Route path="/allCampuses" component={Campuses} />
           <Route path="/campus/:id" component={SingleCampus} />
+          <Route path="/addNewCampus" component={addNewCampus} />
+          <Route path="/addStudent" component={addNewStudent} />
           <Redirect to="/" />
         </Switch>
       </div>

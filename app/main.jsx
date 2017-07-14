@@ -15,3 +15,7 @@ render(
   </Provider>,
   document.getElementById('main')
 )
+
+// Adding a campus works but adding a student doesn't.
+// Deleting campus buttons aren't working properly...currently
+// the button deletes all campuses in the database.
