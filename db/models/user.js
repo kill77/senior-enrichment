@@ -1,8 +1,20 @@
-'use strict';
-var Sequelize = require('sequelize')
-var db = require('../index.js')
+const Sequelize = require('sequelize')
+const db = require('../index.js')
 
 
 module.exports = db.define('user', {
-  name: Sequelize.STRING,
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      is: ["^[a-z]+$",'i']
+    }
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isEmail: true
+    }
+  }
 })
