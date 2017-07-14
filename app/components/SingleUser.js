@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import { NavLink } from 'react-router-dom';
 
 function SingleUser(props) {
 
@@ -13,7 +14,9 @@ function SingleUser(props) {
           <h3>Student ID: {props.user.id}</h3>
           <h3>Name: {props.user.name}</h3>
           <h3>email: {props.user.email}</h3>
-          <h3>Campus: {props.campus && props.campus.name}</h3>
+          <h3>Campus:
+          <NavLink to={`/campus/${props.campus.id}`}>{props.campus && props.campus.name}</NavLink>
+          </h3>
         </div>
       }
     </div>
