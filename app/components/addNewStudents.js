@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { postNewStudent } from '../store';
+import { postNewStudent, fetchAllCampuses } from '../store';
 
 class addNewStudent extends Component {
+
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -10,10 +11,23 @@ class addNewStudent extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.handleSubmit(evt.target.name.value, evt.target.email.value, evt.target.campusId.value);
+    const name = evt.target.name.value;
+    const email = evt.target.email.value;
+    const campusId = evt.target.campusId.value;
+
+    console.log('name: ', name);
+    console.log('email', email);
+    console.log('campusId', campusId);
+
+    this.props.handleSubmit(name, email, campusId);
+  }
+
+  componentDidMount() {
+    this.props.fetchAllCampuses();
   }
 
   render() {
+    console.log('logging at addNewStudents props: ',this.props);
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -30,11 +44,13 @@ class addNewStudent extends Component {
             required
           />
           <label>Enter campus Id</label>
-          <input
-            name="campusId"
-            type="text"
-            required
-          />
+          <select name="campusId" required>
+          {
+            this.props.campus.map(campus => {
+              return <option key={campus.id} value={campus.id}>{campus.name}</option>
+            })
+          }
+          </select>
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -45,7 +61,16 @@ class addNewStudent extends Component {
 const mapDispatchToProps = dispatch => ({
   handleSubmit: (name, email, campusId) => {
     dispatch(postNewStudent(name, email, campusId));
+  },
+  fetchAllCampuses: () => {
+    dispatch(fetchAllCampuses());
   }
 });
 
-export default connect(null, mapDispatchToProps)(addNewStudent);
+const mapStateToProps = (state) => {
+  return {
+    campus: state.campuses
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(addNewStudent);

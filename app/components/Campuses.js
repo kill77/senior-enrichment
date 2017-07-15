@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { deleteCampus } from '../store';
 
 function Campuses(props) {
-  console.log(props);
 
   return (
     <div>
@@ -16,7 +15,7 @@ function Campuses(props) {
                 <NavLink to={`/campus/${campus.id}`}>
                   Campus: {campus.name}
                 </NavLink>
-                <button onClick={props.handleClick(campus.id)} type="submit">Delete</button>
+                <button type="submit" onClick={props.handleDelete(campus.id)}>Delete</button>
               </li>
             )
           })
@@ -33,7 +32,8 @@ const mapStateToProps = function (state) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleClick: (campusId) => {
+  handleDelete: (campusId) => {
+    console.log('from within dispatch');
     dispatch(deleteCampus(campusId));
   }
 })
