@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import { deleteStudent } from '../store';
 
 function Users(props) {
 
@@ -14,6 +15,10 @@ function Users(props) {
                 <NavLink to={`/student/${student.id}`}>
                   NAME: {student.name}
                 </NavLink>
+                <button>
+                  <Link to={`/editStudent/${student.id}`}>Edit</Link>
+                </button>
+                <button type="submit" onClick={() => props.handleDelete(student.id)}>Delete</button>
               </li>
             )
           })
@@ -29,4 +34,10 @@ const mapStateToProps = function (state) {
   }
 }
 
-export default connect(mapStateToProps)(Users);
+const mapDispatchToProps = (dispatch) => ({
+  handleDelete: (studentId) => {
+    dispatch(deleteStudent(studentId));
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

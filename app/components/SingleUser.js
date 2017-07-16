@@ -4,8 +4,9 @@ import _ from 'lodash';
 import { NavLink } from 'react-router-dom';
 
 function SingleUser(props) {
-
+              console.log(props.campus)
   return (
+
     <div>
       {
         props.user &&
@@ -15,7 +16,9 @@ function SingleUser(props) {
           <h3>Name: {props.user.name}</h3>
           <h3>email: {props.user.email}</h3>
           <h3>Campus:
-          <NavLink to={`/campus/${props.campus.id}`}>{props.campus && props.campus.name}</NavLink>
+          <NavLink to={
+
+            `/campus/${props.campus.id}`}>{props.campus && props.campus.name}</NavLink>
           </h3>
         </div>
       }

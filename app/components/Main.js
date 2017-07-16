@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import Campuses from './Campuses';
 import SingleCampus from './SingleCampus';
 import addNewCampus from './addNewCampus';
-import addNewStudent from './addNewStudents.js';
+import addNewStudent from './addNewStudents';
+import editCampus from './editCampus';
+import editStudent from './editStudent';
 
 class Main extends Component {
 
@@ -34,6 +36,8 @@ class Main extends Component {
           <Route path="/campus/:id" component={SingleCampus} />
           <Route path="/addNewCampus" component={addNewCampus} />
           <Route path="/addStudent" component={addNewStudent} />
+          <Route path="/editCampus/:id" component={editCampus} />
+          <Route path="/editStudent/:id" componnt={editStudent} />
           <Redirect to="/" />
         </Switch>
       </div>
